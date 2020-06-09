@@ -1,0 +1,6 @@
+media/*
+!media/.gitkeep
+static/*
+!static/.gitkeep
+.git
+.idea
