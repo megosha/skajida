@@ -17,12 +17,12 @@ class Index(View):
 
 class About(View):
     def get(self, request):
-        # todo возможно подгрузка фото из базы
+        # todo возможно подгрузка фото из базы?
         return render(request, 'about.html', context={})
 
 class Project(View):
     def get(self, request, project_id):
-        # todo подгрузка фото из базы, лого, названия и описания с цветом (для главной)
+        # todo подгрузка лого, названия и описания с цветом (для главной)
         context = {'project_id': project_id,
                    'photos':[], 'description':''}
         return render(request, 'project.html', context={})

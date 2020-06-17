@@ -4,3 +4,4 @@ static/*
 !static/.gitkeep
 .git
 .idea
+.env
