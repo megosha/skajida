@@ -9,6 +9,7 @@ class ArticleKind(models.Model):
     kind = models.CharField(max_length=100, verbose_name="Тип статьи")
 
     class Meta:
+        ordering = ["pk"]
         verbose_name = "Тип статьи"
         verbose_name_plural = "2 - Типы статей"
 
@@ -22,7 +23,7 @@ class Article(models.Model):
     date_publish = models.DateTimeField(verbose_name="Дата публикации статьи")
     title = models.CharField(max_length=250, verbose_name="Заголовок статьи")
     cover = models.FileField(upload_to='images/covers/', blank=True, verbose_name="Обложка статьи")
-    content = models.TextField(verbose_name="Содержание (текст) статьи")
+    content = models.TextField(blank=True, verbose_name="Содержание (текст) статьи")
     videolink = models.TextField(null=True, blank=True, verbose_name="Ссылка на видео (одно)")
 
     class Meta:
@@ -102,19 +103,19 @@ class Settings(models.Model):
                                      verbose_name="Телефон 'Контакты' на главной")
     contact_email = models.CharField(max_length=50, default='', blank=True, null=True,
                                      verbose_name="Email 'Контакты' на главной")
-    contact_address = models.CharField(max_length=50, default='', blank=True, null=True,
+    contact_address = models.TextField(default='', blank=True, null=True,
                                        verbose_name="Адрес 'Контакты' на главной")
     contact_map = models.TextField(default='', blank=True, null=True, verbose_name="Ссылка на адрес в google maps")
     requisites = models.TextField(default='', blank=True, null=True, verbose_name="Реквизиты")
     banner_text = models.TextField(default='Добро пожаловать!', blank=True, null=True,
                                    verbose_name="Текст бегущей строки")
-    about_text = models.TextField(default='', blank=True, null=True, verbose_name="Текст 'О нас' на главной")
+    about_text = models.TextField(default='', blank=True, null=True, verbose_name="Текст 'О Фонде' на главной")
     metadescr = models.TextField(default='', blank=True, null=True, verbose_name="Meta Description")
     metakeywords = models.TextField(default='', blank=True, null=True, verbose_name="Meta Keyword")
     default_newscover = models.ImageField(upload_to='images/covers/', blank=True,
                                           verbose_name="Обложка статьи по умолчанию")
-    default_videocover = models.ImageField(upload_to='images/covers/', blank=True,
-                                           verbose_name="Обложка видео по умолчанию")
+    # default_videocover = models.ImageField(upload_to='images/covers/', blank=True,
+    #                                        verbose_name="Обложка видео по умолчанию")
     ig = models.CharField(max_length=100, default='', blank=True, null=True,
                           verbose_name="User id аккаунта в Instagram")
     vk = models.CharField(max_length=100, default='', blank=True, null=True,
