@@ -53,11 +53,12 @@ class ProjectsAdmin(admin.ModelAdmin):
             return ''
         return mark_safe(f'<a href="{obj.logo.url}" target="_blank"><img src="{obj.logo.url}" height="70px"/></a>')
 
-    logo_tag.short_description = 'Обложка'
+    logo_tag.short_description = 'Логотип'
     logo_tag.allow_tags = True
     readonly_fields = ['logo_tag']
-    list_display = ['title', 'logo_tag', 'color']
-    list_display_links = ['title']
+    list_display = ['pk', 'title', 'order', 'logo_tag', 'color', 'photo_amount']
+    list_display_links = ['pk', 'title']
+    list_editable = ['order', 'photo_amount']
     search_fields = ['title']
     save_on_top = True
 

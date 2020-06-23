@@ -46,15 +46,18 @@ class APhoto(models.Model):
 
 class Projects(models.Model):
     title = models.CharField(max_length=100, verbose_name="Наименование проекта")
-    logo = models.ImageField(upload_to='images/logos/', blank=True, verbose_name="Логотип")
+    logo = models.ImageField(upload_to='images/logos/', blank=True,
+                             verbose_name="Логотип (оптимальная высота 180px +-20px)")
+    order = models.PositiveSmallIntegerField(verbose_name="Порядок отображения", null=True, blank=True, unique=True)
     short_description = models.TextField(null=True, blank=True, verbose_name="Краткое описание на главной")
     full_description = models.TextField(null=True, blank=True, verbose_name="Полное описание")
+    photo_amount = models.PositiveSmallIntegerField(verbose_name="Количество отображаемых фото в разделе проекта", default=0)
     videolink = models.TextField(null=True, blank=True, verbose_name="Идентификатор в ссылке на видео Youtube")
-    color = models.CharField(max_length=50, choices=(('1','Белый'), ('2','Синий')),
+    color = models.CharField(max_length=10, choices=(('1', 'Белый'), ('2', 'Синий')),
                              verbose_name="Фон карточки проекта на Главной")
 
     class Meta:
-        ordering = ["title"]
+        ordering = ["order"]
         verbose_name = "Проект"
         verbose_name_plural = "5 - Проекты"
 
@@ -64,7 +67,6 @@ class Projects(models.Model):
 
 class Blagodarnosti(models.Model):
     year = models.CharField(max_length=4, verbose_name="Год - в формате 4 цифр")
-
 
     class Meta:
         ordering = ["-year"]
@@ -114,8 +116,8 @@ class Settings(models.Model):
     metakeywords = models.TextField(default='', blank=True, null=True, verbose_name="Meta Keyword")
     default_newscover = models.ImageField(upload_to='images/covers/', blank=True,
                                           verbose_name="Обложка статьи по умолчанию")
-    # default_videocover = models.ImageField(upload_to='images/covers/', blank=True,
-    #                                        verbose_name="Обложка видео по умолчанию")
+    default_videocover = models.ImageField(upload_to='images/covers/', blank=True,
+                                           verbose_name="Обложка видео по умолчанию")
     ig = models.CharField(max_length=100, default='', blank=True, null=True,
                           verbose_name="User id аккаунта в Instagram")
     vk = models.CharField(max_length=100, default='', blank=True, null=True,

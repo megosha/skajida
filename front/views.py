@@ -1,9 +1,11 @@
+import os
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
 from django.views import View
 from django.conf import settings as base_conf
+import random
 
 from front import models
 
@@ -23,10 +25,12 @@ def make_context(**kwargs):
 
 class Index(View):
     def get(self, request):
-        # todo проекты с выбором фона, лого, заголовка и текста
+        projects3 = models.Projects.objects.all()[:3]
+        projects4 = models.Projects.objects.all()[3:7]
         news = models.Article.objects.all().filter(kind__pk__in=range(1, 3)).order_by("-date_publish")[:3]
         context = make_context(news=news,
-                               c=3
+                               projects3=projects3,
+                               projects4=projects4,
                                )
         return render(request, 'index.html', context=context)
 
@@ -39,10 +43,26 @@ class About(View):
 
 class Project(View):
     def get(self, request, project_id):
-        # todo подгрузка лого, названия и описания с цветом (для главной)
-        context = {'project_id': project_id,
-                   'photos': [], 'description': ''}
-        return render(request, 'project.html', context={})
+        # todo подгрузка лого, названия и описания
+        project = models.Projects.objects.filter(pk=project_id).first()
+        if not project:
+            return HttpResponseRedirect('/')
+        BASE_DIR = base_conf.BASE_DIR
+        photos = os.listdir(os.path.join(BASE_DIR, 'static', 'images', 'projects', f'{project.pk}'))
+        if photos:
+            cover =sorted(photos)[0]
+            random.shuffle(photos)
+            if len(photos) >= project.photo_amount:
+                photos_part = photos[:project.photo_amount]
+            else:
+                photos_part = photos
+        else:
+            photos_part = []
+            cover = None
+        context = make_context(project=project,
+                               photos=photos_part,
+                               cover=cover)
+        return render(request, 'project.html', context=context)
 
 
 class Blagodarnosti(View):
