@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="/assets/theme/css/style.css">
   <link rel="stylesheet" href="/assets/gallery/style.css">
   <link rel="stylesheet" href="/assets/recaptcha.css">
+  <link rel="stylesheet" href="/assets/styles/me.css">
   <link rel="preload" as="style" href="/assets/mobirise/css/mbr-additional.css"><link rel="stylesheet" href="/assets/mobirise/css/mbr-additional.css" type="text/css">
 {#  <link rel="stylesheet" href="/assets/web/assets/mobirise-icons2/mobirise2.css">#}
 {#  <link rel="stylesheet" href="/assets/web/assets/mobirise-icons/mobirise-icons.css">#}
@@ -132,7 +133,7 @@
                             <div class="mbr-gallery-item mbr-gallery-item--p0" data-video-url="false" data-tags="">
                                 <div href="#lb-gallery3-7m" data-slide-to="{{ forloop.counter0 }}" data-toggle="modal">
                                     {% thumbnail p.photo "500x300" crop="center" as im %}
-                                        <img src="{{ im.url }}">
+                                        <img src="{{ im.url }}"><span class="icon-focus"></span>
                                     {% endthumbnail %}
 {#                                    <img src="{{ p.photo|thumbnail_url:'slider' }}" alt="" title=""><span class="icon-focus"></span>#}
                                 </div>
@@ -174,45 +175,61 @@
 <section class="extTestimonials cid-rYixR6lttH" id="extTestimonials2-2v">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="card col-12 col-md-6">
-                {% if prev_article and prev_article is not None %}
-{#                <a href="#">#}
-                <div class="card-box" onclick="location.href='/article/{{ prev_article }}'">
+            {% if prev_article and prev_article is not None %}
+            <div class="card col-12 col-md-6 cursor" onclick="location.href='/article/{{ prev_article.kind.pk }}-{{ prev_article.pk }}'">
+            {% else %}
+                <div class="card col-12 col-md-6">
+            {% endif %}
+                <div class="card-box">
                     <div class="card-header">
                         <h4 class="card-title mbr-fonts-style align-center mb-0 mbr-white display-5">Предыдущая новость</h4>
                     </div>
-                    <p class="mbr-text card-text mbr-fonts-style align-left m-0 display-7">
-                        Lorem Ipsum dolor sit amet, consectetur adipisicing elit. Ab cupiditate est eveniet.
-                    </p>
-                    <div class="underline align-left">
-                         <div class="line"></div>
-                    </div>
-                    <p class="mbr-text card-sign mbr-fonts-style align-left mb-0 display-7">07.03.2020</p>
-                </div>
-                {% else %}
-                        <br><br><h2 class="heading mbr-card-title mbr-fonts-style display-5 text-secondary">Нет более ранних статей</h2>
+                    {% if prev_article and prev_article is not None %}
+                        <p class="mbr-text card-sign mbr-fonts-style align-left m-0 display-7">
+                            {{ prev_article.title }}
+                        </p>
+                        <div class="underline align-left">
+                             <div class="line"></div>
+                        </div>
+                        <p class="mbr-text card-text mbr-fonts-style align-left mb-0 display-7">{{ prev_article.date_publish|date:"d.m.Y" }}</p>
+                            {% else %}
+                        <div class="underline align-left">
+                             <div class="line"></div>
+                        </div>
+                            <br><h2 class="heading mbr-card-title mbr-fonts-style display-5 text-muted">Нет более ранних новостей</h2>
                 {% endif %}
-{#                </a>#}
                 </div>
+            </div>
 
 
-            <div class="card col-12 col-md-6"><a href="#">
+
+        {% if next_article and next_article is not None %}
+            <div class="card col-12 col-md-6 cursor"  onclick="location.href='/article/{{ next_article.kind.pk }}-{{ next_article.pk }}'">
+            {% else %}
+            <div class="card col-12 col-md-6">
+            {% endif %}
                 <div class="card-box">
                     <div class="card-header">
-                        <div class="card-img" hidden="">
-                            <img src="/assets/images/face8.jpg" alt="">
-                        </div>
                         <h4 class="card-title mbr-fonts-style align-center mb-0 mbr-white display-5">Следующая новость</h4>
                     </div>
-                    <p class="mbr-text card-text mbr-fonts-style align-left m-0 display-7">
-                        Нет более новых новостей .
-                    </p>
-                    <div class="underline align-left">
-                         <div class="line"></div>
-                    </div>
-                    <p class="mbr-text card-sign mbr-fonts-style align-left mb-0 display-7"><br><br></p>
-                </div></a>
+                    {% if next_article and next_article is not None %}
+                        <p class="mbr-text card-sign mbr-fonts-style align-left m-0 display-7">
+                            {{ next_article.title }}
+                        </p>
+                        <div class="underline align-left">
+                             <div class="line"></div>
+                        </div>
+                        <p class="mbr-text card-text mbr-fonts-style align-left mb-0 display-7">{{ next_article.date_publish|date:"d.m.Y" }}</p>
+                {% else %}
+                        <div class="underline align-left">
+                             <div class="line"></div>
+                        </div>
+                        <br><h2 class="heading mbr-card-title mbr-fonts-style display-5 text-muted">Нет более поздних новостей</h2>
+                {% endif %}
+                </div>
             </div>
+
+
 
 
         </div>
