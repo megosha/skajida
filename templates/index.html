@@ -1,3 +1,4 @@
+{% load thumbnail %}
 <!DOCTYPE html>
 <html  >
 <head>
@@ -143,48 +144,6 @@
                     </div>
                 </div>
             {% endfor %}
-{#            <div class="card p-3 col-12 col-md-8 col-lg-4" onclick="location.href='/project/1'">#}
-{#                <div class="card-wrapper card1">#}
-{#                    <div class="img-wrap">#}
-{#                        <img src="/assets/images/deti-logo2-362x342.png" alt="" title="">#}
-{#                    </div>#}
-{#                    <div class="card-box">#}
-{#                        <h4 class="card-title title1 pb-1 align-left mbr-white mbr-fonts-style display-4"><strong>Чужих детей не бывает</strong></h4>#}
-{#                        <p class="mbr-text align-left text1 mbr-regular mbr-white mbr-fonts-style display-7">Осуществление благотворительных мероприятий, направленных на защиту семьи, детей-сирот, детей с ограниченными возможностями, детей из слабо социально защищённых семей, многодетных семей, детей, оставшихся без попечения родителей.<br></p>#}
-{#                    </div>#}
-{#                    <a href="/project/1"><span class="mbr-iconfont icon mobi-mbri-right mobi-mbri"></span></a>#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="card col2 p-3 col-12 col-md-8 col-lg-4" onclick="location.href='project.html'">#}
-{#                <div class="card-wrapper card2">#}
-{#                    <div class="img-wrap">#}
-{#                        <img src="/assets/images/364x364.png" alt="" title="">#}
-{#                    </div>#}
-{#                    <div class="card-box">#}
-{#                        <h4 class="card-title title2 pb-1 align-left mbr-white mbr-fonts-style display-4"><strong>Твое здоровье в твоих руках</strong></h4>#}
-{#                        <p class="mbr-text align-left text2 mbr-regular mbr-white mbr-fonts-style display-7">Действующий проект бесплатный "Тренажерный зал" для детей и подростков и молодежи нашего города каждый день принимает от 10 до 15 детей.#}
-{#<br></p>#}
-{#                    </div>#}
-{#                    <a href="#"><span class="mbr-iconfont icon mobi-mbri-right mobi-mbri"></span></a>#}
-{#                </div>#}
-{#            </div>#}
-
-{#            <div class="card col3 p-3 col-md-8 col-lg-4" onclick="location.href='project.html'">#}
-{#                <div class="card-wrapper card3">#}
-{#                    <div class="img-wrap">#}
-{#                        <img src="/assets/images/belka-360x301.png" alt="" title="">#}
-{#                    </div>#}
-{#                    <div class="card-box">#}
-{#                        <h4 class="card-title title3 pb-1 align-left mbr-white mbr-fonts-style display-4"><strong>Профилактическая белка</strong></h4>#}
-{#                        <p class="mbr-text align-left text3 mbr-regular mbr-white mbr-fonts-style display-7">Направлен на пропаганду здорового образа жизни среди молодёжи, студентов учебных заведений и #}
-{#<br>также для реализаций благотворительных мероприятий для детей.<br></p>#}
-{#                    </div>#}
-{#                    <a href="#"><span class="mbr-iconfont icon mobi-mbri-right mobi-mbri"></span></a>#}
-{#                </div>#}
-{#            </div>#}
-
-            
-
         </div>
     </div>
 </section>
@@ -214,63 +173,6 @@
                     </div>
                 </div>
         {% endfor %}
-
-{#            <div class="card p-3 col-12 col-md-8 col-lg-3" onclick="location.href='project.html'">#}
-{#                <div class="card-wrapper card1">#}
-{#                    <div class="img-wrap">#}
-{#                        <img src="/assets/images/422x304.png" alt="" title="">#}
-{#                    </div>#}
-{#                    <div class="card-box">#}
-{#                        <h4 class="card-title title1 pb-1 align-left mbr-white mbr-fonts-style display-4"><strong>Stop-спайс#}
-{#</strong></h4>#}
-{#                        <p class="mbr-text align-left text1 mbr-regular mbr-white mbr-fonts-style display-7">Проект осуществляется с целью профилактики наркомании и алкоголизма в образовательных учреждениях школах, колледжах, высших учебных заведениях и#}
-{#<br>среди молодежи города на городских площадках.&nbsp;<br></p>#}
-{#                    </div>#}
-{#                    <a href="#"><span class="mbr-iconfont icon mobi-mbri-right mobi-mbri"></span></a>#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="card col2 p-3 col-12 col-md-8 col-lg-3" onclick="location.href='project.html'">#}
-{#                <div class="card-wrapper card2">#}
-{#                    <div class="img-wrap">#}
-{#                        <img src="/assets/images/likvid-430x342.png" alt="" title="">#}
-{#                    </div>#}
-{#                    <div class="card-box">#}
-{#                        <h4 class="card-title title2 pb-1 align-left mbr-white mbr-fonts-style display-4"><strong>Ликвидация#}
-{#</strong></h4>#}
-{#                        <p class="mbr-text align-left text2 mbr-regular mbr-white mbr-fonts-style display-7">Волонтерская акция по ликвидации надписей, в общественных местах (на домах, заборах и гаражах) города Бийска, содержащих электронный адрес нарко-распространителей.#}
-{#<br><br><br></p>#}
-{#                    </div>#}
-{#                    <a href="#"><span class="mbr-iconfont icon mobi-mbri-right mobi-mbri"></span></a>#}
-{#                </div>#}
-{#            </div>#}
-
-{#            <div class="card col3 p-3 col-md-8 col-lg-3" onclick="location.href='project.html'">#}
-{#                <div class="card-wrapper card3">#}
-{#                    <div class="img-wrap">#}
-{#                        <img src="/assets/images/1-422x417.png" alt="" title="">#}
-{#                    </div>#}
-{#                    <div class="card-box">#}
-{#                        <h4 class="card-title title3 pb-1 align-left mbr-white mbr-fonts-style display-4"><strong>Накорми голодного</strong><strong><br></strong></h4>#}
-{#                        <p class="mbr-text align-left text3 mbr-regular mbr-white mbr-fonts-style display-7">проект еженедельно осуществляет кормление горячим обедом людей без определенного места жительства, попавших в трудную жизненную ситуацию, проект существует с 2013 года.<br><br><br></p>#}
-{#                    </div>#}
-{#                    <a href="#"><span class="mbr-iconfont icon mobi-mbri-right mobi-mbri"></span></a>#}
-{#                </div>#}
-{#            </div>#}
-
-{#            <div class="card col4 p-3 col-md-8 col-lg-3" onclick="location.href='project.html'">#}
-{#                <div class="card-wrapper card4">#}
-{#                    <div class="img-wrap">#}
-{#                        <img src="/assets/images/4-1-454x454.png" alt="" title="">#}
-{#                    </div>#}
-{#                    <div class="card-box">#}
-{#                        <h4 class="card-title title4 pb-1 align-left mbr-white mbr-fonts-style display-4"><strong>Социальная помощь</strong>#}
-{#                        </h4>#}
-{#                        <p class="mbr-text align-left text4 mbr-regular mbr-white mbr-fonts-style display-7">Центр социальной помощи людям, попавшим в трудную жизненную ситуацию.<br><br><br><br><br><br><br><br> </p>#}
-{#                    </div>#}
-{#                    <a href="#"><span class="mbr-iconfont icon mobi-mbri-right mobi-mbri"></span></a>#}
-{#                </div>#}
-{#            </div>#}
-
         </div>
     </div>
 </section>
@@ -284,12 +186,15 @@
         <div class="container">
             <h2 class="mbr-fonts-style mb-4 align-center display-2">Наши&nbsp;<strong>Новости</strong></h2>
             <h3 class="mbr-section-subtitle mbr-fonts-style mb-5 mbr-light align-center display-5">
-                <a href="news.html" class="text-primary">Перейти ко всем</a></h3>
+                <a href="/news/0" class="text-primary">Перейти ко всем</a></h3>
             <div class="media-container-row">
                 {% for n in news %}
                 <div class="card col-12 col-md-4 col-lg-4">
                     <div class="card-img">
-                        <img src="{{ n.cover.url }}" alt="">
+                        {% thumbnail n.cover "300x150" crop="center" as im %}
+                            <img src="{{ im.url }}" alt="">
+                        {% endthumbnail %}
+{#                        <img src="{{ n.cover.url }}" alt="">#}
                     </div>
                     <div class="card-box">
                         <p class="date mb-4">
@@ -299,7 +204,7 @@
                             {{ n.title }}
                         </h4>
                         <p class="mbr-text mbr-fonts-style display-7">
-                            {{ n.content|truncatewords:"20" }}
+                            {{ n.content|truncatewords:"15" }}
                         </p>
                         <div class="mbr-section-btn"><a class="btn-underline mr-3 text-info display-4" href="/article/{{ n.kind.pk }}-{{ n.pk }}">Читать дальше &gt;</a></div>
                     </div>

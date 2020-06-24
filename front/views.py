@@ -1,4 +1,7 @@
 import os
+
+from django.contrib.auth import authenticate, login, logout
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils import timezone
@@ -77,7 +80,31 @@ class News(View):
     def get(self, request, category_id):
         # todo функционал
         # todo функционал под реабилитацию
-        return render(request, 'news.html', context={})
+
+        kinds = models.ArticleKind.objects.all()
+        kinds_pk = list(kinds.values_list('pk', flat=True))
+        if category_id in kinds_pk:
+            current_category = kinds.filter(pk=category_id).first()
+            news = models.Article.objects.filter(kind__pk=category_id, date_publish__lte=timezone.now()).order_by(
+                "-date_publush")
+        else:
+            current_category = None
+            news = models.Article.objects.filter(date_publish__lte=timezone.now()).order_by("-date_publush")
+        paginator = Paginator(news, 10)
+        page = request.GET.get('page')
+        try:
+            news = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer deliver the first page
+            news = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range deliver last page of results
+            news = paginator.page(paginator.num_pages)
+        context = make_context(kinds=kinds,
+                               current_category=current_category,
+                               news=news,
+                               page=page)
+        return render(request, 'news.html', context=context)
         # todo return render(request, 'reability_news.html', context={})
 
 

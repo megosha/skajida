@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="/assets/animatecss/animate.min.css">
   <link rel="stylesheet" href="/assets/theme/css/style.css">
   <link rel="stylesheet" href="/assets/recaptcha.css">
+    <link rel="stylesheet" href="/static/styles/me.css">
   <link rel="preload" as="style" href="/assets/mobirise/css/mbr-additional.css"><link rel="stylesheet" href="/assets/mobirise/css/mbr-additional.css" type="text/css">
   
   <script src="/assets/web/assets/lazyload/lazyload.js"></script>
@@ -36,46 +37,46 @@
 
 <section class="extContent cid-rYi0l6pc6J" id="extContent21-27">
 
-    
-
-    
-
+    {% if current_category != 4 %}
     <div class="container">
         <h2 class="mbr-section-title pb-3 mbr-fonts-style mbr-bold display-2">Категории</h2>
 
         <div class="row">
             <div class="col-md-4">
+                <p class="mbr-text mbr-fonts-style display-7">
+                    <span class="fa fa-star mbr-iconfont mr-2 {% if current_category is None %}active{% else %}normal{% endif %}"></span>
+                    <a href="/news/0" class="{% if current_category is None %}text-info{% else %}normal{% endif %}">Все категории</a></p>
+            </div>
+           {% for k in kinds %}
+               {% if k.pk != 4 %}
+            <div class="col-md-4">
                <p class="mbr-text mbr-fonts-style display-7">
-                   <span class="fa fa-star mbr-iconfont mr-2" style="font-size: 20px; color: rgb(107, 136, 209);"></span><a href="/news/1">Мероприятия</a></p>
+                   <span class="fa fa-star mbr-iconfont mr-2 {% if current_category is not None and current_category.pk == k.pk %}active{% else %}normal{% endif %}"></span>
+                   <a href="/news/{{ k.pk }}" class="{% if current_category is not None and current_category.pk == k.pk %}text-info{% else %}normal{% endif %}">{{ k.kind }}</a></p>
 
             </div>
+               {% endif %}
+            {% endfor %}
 
-            <div class="col-md-4">
-                
-                <p class="mbr-text mbr-fonts-style display-7">
-                    <span class="fa fa-star mbr-iconfont mr-2" style="font-size: 20px; color: rgb(107, 136, 209);"></span><a href="/news/1" class="text-warning">Фотоотчеты</a></p>
+{#            <div class="col-md-4">#}
+{#                #}
+{#                <p class="mbr-text mbr-fonts-style display-7">#}
+{#                    <span class="fa fa-star mbr-iconfont mr-2" style="font-size: 20px; color: rgb(107, 136, 209);"></span><a href="/news/1" class="text-warning">Фотоотчеты</a></p>#}
+{##}
+{#            </div>#}
+{##}
+{##}
+{#            <div class="col-md-4">#}
+{#                 #}
+{#                <p class="mbr-text mbr-fonts-style display-7">#}
+{#                    <span class="fa fa-star mbr-iconfont mr-2" style="font-size: 20px; color: rgb(107, 136, 209);"></span><a href="/news/1" class="text-warning">Видеоотчеты</a></p>#}
+{##}
+{#            </div>#}
 
-            </div>
-
-            <div class="col-md-4">
-                
-                <p class="mbr-text mbr-fonts-style display-7">
-                    <span class="fa fa-star mbr-iconfont mr-2" style="font-size: 20px; color: rgb(159, 74, 65);"></span><a href="/news/1" class="text-info">Все категории</a></p>
-
-            </div>
-
-            <div class="col-md-4">
-                 
-                <p class="mbr-text mbr-fonts-style display-7">
-                    <span class="fa fa-star mbr-iconfont mr-2" style="font-size: 20px; color: rgb(107, 136, 209);"></span><a href="/news/1" class="text-warning">Видеоотчеты</a></p>
-
-            </div>
-
-       
-            
 
         </div>
     </div>
+    {% endif %}
 </section>
 
 <section class="extFeatures cid-rYhYAEVTgi" id="extFeatures34-22">
@@ -84,7 +85,7 @@
 
     
     <div class="container">
-        <h2 class="mbr-section-title pb-1 mbr-normal mbr-fonts-style align-left display-2">Все категории</h2>
+        <h2 class="mbr-section-title pb-1 mbr-normal mbr-fonts-style align-left display-2">{% if current_category is None %}Все категории {% else %} {{ current_category.kind }}{% endif %}</h2>
         <div class="row row-content justify-content-center">
 
 
