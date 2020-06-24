@@ -43,7 +43,6 @@ class About(View):
 
 class Project(View):
     def get(self, request, project_id):
-        # todo подгрузка лого, названия и описания
         project = models.Projects.objects.filter(pk=project_id).first()
         if not project:
             return HttpResponseRedirect('/')
@@ -67,8 +66,9 @@ class Project(View):
 
 class Blagodarnosti(View):
     def get(self, request):
-        # todo подгрузка фото из базы по годам
-        return render(request, 'blagodarnosti.html', context={})
+        photos = models.BPhoto.objects.all().order_by("year")
+        context = make_context(photos=photos)
+        return render(request, 'blagodarnosti.html', context=context)
 
 
 class News(View):
@@ -99,6 +99,7 @@ class Documents(View):
 
 
 class RehabProgram(View):
+    #todo videos
     def get(self, request):
         return render(request, 'reability.html', context={})
 

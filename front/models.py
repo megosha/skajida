@@ -27,7 +27,6 @@ class Article(models.Model):
     videolink = models.TextField(null=True, blank=True, verbose_name="Ссылка на видео (одно)")
 
     class Meta:
-        ordering = ["-date_publish"]
         verbose_name = "Статья"
         verbose_name_plural = "1 - Статьи"
 
@@ -76,11 +75,14 @@ class Blagodarnosti(models.Model):
     def __str__(self):
         return f'{self.year}'
 
+    def photos(self):
+        return BPhoto.objects.filter(year=self.year)
+
 
 class BPhoto(models.Model):
-    article = models.ForeignKey('Blagodarnosti', null=True, blank=True, default=None, on_delete=models.CASCADE,
+    year = models.ForeignKey('Blagodarnosti', null=True, blank=True, default=None, on_delete=models.CASCADE,
                                 verbose_name="Благодарности")
-    photo = models.ImageField(upload_to='images/articles/', verbose_name="Фотографии (одна или несколько)")
+    photo = models.ImageField(upload_to='images/blagodarnosti/', verbose_name="Фотографии (одна или несколько)")
 
     def __str__(self):
         return f'{self.photo.name}'
