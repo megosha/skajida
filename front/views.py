@@ -83,10 +83,11 @@ class News(View):
 
 class Article(View):
     def get(self, request, category_id, article_id):
-        # todo функционал
-        # todo функционал под реабилитацию
+        # todo сделать ссылку на возврат
         article = models.Article.objects.filter(kind__pk=category_id, pk=article_id,
                                                 date_publish__lte=timezone.now()).first()
+        if not article:
+            HttpResponseRedirect('/')
         photos = models.APhoto.objects.filter(article__pk=article_id)
         next_article = models.Article.objects.filter(date_publish__gt=article.date_publish,
                                                      date_publish__lte=timezone.now(),
@@ -100,8 +101,6 @@ class Article(View):
                                next_article=next_article,
                                prev_article=prev_article
                                )
-        if not article:
-            HttpResponseRedirect('/')
         return render(request, 'article.html', context=context)
 
 
