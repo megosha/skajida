@@ -1502,6 +1502,9 @@ section.lazy-placeholder:after {
     margin: 0rem;
   }
 }
+.cid-rYbGXHCoVE .cursor {
+  cursor: pointer;
+}
 .cid-rYbGXHCoVE .card {
   height: fit-content;
 }
@@ -1527,7 +1530,12 @@ section.lazy-placeholder:after {
   width: 100%;
   height: 450px;
 }
-
+.cid-rYbGXHCoVE .dark {
+  background-color: #3b67d9;
+}
+.cid-rYbGXHCoVE .light {
+  background-color: #efefef;
+}
 .cid-rYbGXHCoVE .card1 {
   background-color: #3b67d9;
 }
@@ -1599,11 +1607,24 @@ section.lazy-placeholder:after {
 .cid-rYbGXHCoVE .mbr-text {
   color: #cccccc;
 }
+.cid-rYbGXHCoVE .text_dark {
+  color: #232323;
+}
+.cid-rYbGXHCoVE .text_light {
+  color: #efeeee;
+}
 .cid-rYbGXHCoVE .text2 {
   color: #232323;
 }
 .cid-rYbGXHCoVE .text3 {
   color: #efeeee;
+}
+.cid-rYbGXHCoVE .title_dark {
+  color: #232323;
+  text-align: left;
+}
+.cid-rYbGXHCoVE .title_light {
+  color: #ffffff;
 }
 .cid-rYbGXHCoVE .title2 {
   color: #232323;
@@ -1649,6 +1670,9 @@ section.lazy-placeholder:after {
     margin: 0rem;
   }
 }
+.cid-rYbHqR7y58 .cursor {
+  cursor: pointer;
+}
 .cid-rYbHqR7y58 .card {
   height: fit-content;
 }
@@ -1672,6 +1696,12 @@ section.lazy-placeholder:after {
 .cid-rYbHqR7y58 .card-box {
   padding: 3rem 3rem 4rem 3rem;
   width: 100%;
+}
+.cid-rYbHqR7y58 .light {
+  background-color: #efefef;
+}
+.cid-rYbHqR7y58 .dark {
+  background-color: #3b68d9;
 }
 .cid-rYbHqR7y58 .card1 {
   background-color: #efefef;
@@ -1750,6 +1780,12 @@ section.lazy-placeholder:after {
 .cid-rYbHqR7y58 .text3 {
   color: #efeeee;
 }
+.cid-rYbHqR7y58 .title_dark {
+  color: #232323;
+}
+.cid-rYbHqR7y58 .title_light {
+  color: #ffffff;
+}
 .cid-rYbHqR7y58 .title2 {
   color: #232323;
 }
@@ -1762,6 +1798,12 @@ section.lazy-placeholder:after {
 .cid-rYbHqR7y58 .title4 {
   color: #ffffff;
   text-align: left;
+}
+.cid-rYbHqR7y58 .text_light {
+  color: #efeeee;
+}
+.cid-rYbHqR7y58 .text_dark {
+  color: #333333;
 }
 .cid-rYbHqR7y58 .text4 {
   color: #efeeee;
@@ -1817,7 +1859,7 @@ section.lazy-placeholder:after {
   }
 }
 .cid-rYbAmvTCif {
-  padding-top: 0px;
+  padding-top: 50px;
   padding-bottom: 0px;
   background-color: #ffffff;
 }
@@ -5018,6 +5060,9 @@ section.lazy-placeholder:after {
   padding-bottom: 0px;
   background-color: #efefef;
 }
+.cid-rYixR6lttH .cursor {
+  cursor: pointer!important;
+}
 .cid-rYixR6lttH .card {
   padding: 1rem;
 }
@@ -5079,6 +5124,7 @@ section.lazy-placeholder:after {
   -webkit-box-shadow: 0px 0px 30px rgba(115, 128, 157, 0.1);
   box-shadow: 0px 0px 30px rgba(115, 128, 157, 0.1);
   border-radius: .25rem;
+  height: 240px;
 }
 .cid-rYixR6lttH .card-text,
 .cid-rYixR6lttH .mbr-subtitle {
@@ -5957,7 +6003,8 @@ section.lazy-placeholder:after {
 .cid-s0a4vEb1X8 {
   padding-top: 0px;
   padding-bottom: 0px;
-  background-color: #ffffff;
+  background-color: #333333;
+  /*background-color: #ffffff;*/
   overflow: hidden;
 }
 .cid-s0a4vEb1X8 .mbr-slider .carousel-control {
@@ -8731,7 +8778,7 @@ section.lazy-placeholder:after {
   color: #f4f8fa;
 }
 .cid-s0EiKtwjbJ {
-  padding-top: 120px;
+  padding-top: 170px;
   padding-bottom: 45px;
   background-color: #ffffff;
 }
@@ -8821,7 +8868,7 @@ section.lazy-placeholder:after {
 }
 .cid-rYWr5slyRX .mbr-gallery-filter li.active .btn,
 .cid-rYWr5slyRX .mbr-gallery-filter li .btn.active {
-  color: #149dcc !important;
+  color: #a61000 !important;
   background: transparent;
 }
 .cid-rYWr5slyRX .mbr-gallery-filter .btn::after {
@@ -8834,14 +8881,14 @@ section.lazy-placeholder:after {
   transform: translateX(-50%) scale(0);
   width: 4px;
   transition: all 0.3s ease-in-out;
-  background: #149dcc !important;
+  background: #a61000 !important;
 }
 .cid-rYWr5slyRX .mbr-gallery-filter li:not(.active) .btn.active:after,
 .cid-rYWr5slyRX .mbr-gallery-filter li.active .btn:not(.active):after,
 .cid-rYWr5slyRX .mbr-gallery-filter .mbr-gallery-filter .btn:hover:after {
   -webkit-transform: translateX(-50%) scale(1);
   transform: translateX(-50%) scale(1);
-  background: #149dcc !important;
+  background: #a61000 !important;
 }
 .cid-rYWr5slyRX .mbr-gallery-filter .mbr-gallery-filter-all.active .btn.active:after,
 .cid-rYWr5slyRX .mbr-gallery-filter .mbr-gallery-filter-all:not(.active) .btn.active:after {

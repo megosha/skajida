@@ -15,6 +15,7 @@
 	text-align:left; /* reset align=center */
 	font-size: 10px;
 	text-shadow: none; /* fix some user styles */
+	/*overflow: hidden;*/
 
 	/* reset box-sizing (to boostrap friendly) */
 	-webkit-box-sizing: content-box;
