@@ -1,3 +1,4 @@
+{% load thumbnail %}
 <!DOCTYPE html>
 <html  >
 <head>
@@ -11,7 +12,7 @@
   
   
   <title>Новость</title>
-  <link rel="stylesheet" href="/assets/web/assets/mobirise-icons2/mobirise2.css">
+    <link rel="stylesheet" href="/assets/web/assets/mobirise-icons2/mobirise2.css">
   <link rel="stylesheet" href="/assets/web/assets/mobirise-icons/mobirise-icons.css">
   <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap-grid.min.css">
@@ -19,15 +20,30 @@
   <link rel="stylesheet" href="/assets/dropdown/css/style.css">
   <link rel="stylesheet" href="/assets/animatecss/animate.min.css">
   <link rel="stylesheet" href="/assets/tether/tether.min.css">
+  <link rel="stylesheet" href="/assets/datepicker/jquery.datetimepicker.min.css">
   <link rel="stylesheet" href="/assets/formstyler/jquery.formstyler.css">
   <link rel="stylesheet" href="/assets/formstyler/jquery.formstyler.theme.css">
-  <link rel="stylesheet" href="/assets/datepicker/jquery.datetimepicker.min.css">
   <link rel="stylesheet" href="/assets/theme/css/style.css">
-  <link rel="stylesheet" href="/assets/wowslider-init/style.css">
+  <link rel="stylesheet" href="/assets/gallery/style.css">
   <link rel="stylesheet" href="/assets/recaptcha.css">
   <link rel="preload" as="style" href="/assets/mobirise/css/mbr-additional.css"><link rel="stylesheet" href="/assets/mobirise/css/mbr-additional.css" type="text/css">
+{#  <link rel="stylesheet" href="/assets/web/assets/mobirise-icons2/mobirise2.css">#}
+{#  <link rel="stylesheet" href="/assets/web/assets/mobirise-icons/mobirise-icons.css">#}
+{#  <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">#}
+{#  <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap-grid.min.css">#}
+{#  <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap-reboot.min.css">#}
+{#  <link rel="stylesheet" href="/assets/dropdown/css/style.css">#}
+{#  <link rel="stylesheet" href="/assets/animatecss/animate.min.css">#}
+{#  <link rel="stylesheet" href="/assets/tether/tether.min.css">#}
+{#  <link rel="stylesheet" href="/assets/formstyler/jquery.formstyler.css">#}
+{#  <link rel="stylesheet" href="/assets/formstyler/jquery.formstyler.theme.css">#}
+{#  <link rel="stylesheet" href="/assets/datepicker/jquery.datetimepicker.min.css">#}
+{#  <link rel="stylesheet" href="/assets/theme/css/style.css">#}
+{#  <link rel="stylesheet" href="/assets/wowslider-init/style.css">#}
+{#  <link rel="stylesheet" href="/assets/recaptcha.css">#}
+{#  <link rel="preload" as="style" href="/assets/mobirise/css/mbr-additional.css"><link rel="stylesheet" href="/assets/mobirise/css/mbr-additional.css" type="text/css">#}
   
-  <script src="/assets/web/assets/lazyload/lazyload.js"></script>
+{#  <script src="/assets/web/assets/lazyload/lazyload.js"></script>#}
 
     {% include 'includes/meta.html' %}
 
@@ -47,84 +63,33 @@
     <div class="container-fluid card-wrapper">
         <div class="row justify-content-center align-items-center" style="min-height: 9vw;">
              <div class="col-xl-10 col-lg-10 col-md-12 text-block">
-                <h2 class="mbr-section-title mbr-fonts-style mbr-white mbr-bold display-2">«Творческая кузница»</h2>                 
+                <h2 class="mbr-section-title mbr-fonts-style mbr-white mbr-bold display-2">{{ article.title }}</h2>
              </div>
         </div>
     </div>
 </section>
 
 <section class="mbr-section extContent cid-rYipkQZSwb" id="extContent16-2l">
-
-    
-
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10 col-sm-12 text-section">
                 
                 <p><a href="/news/1">Вернуться к списку новостей</a></p>
-                {{ article.title }} {{ article.date_publish }}
                 <h3 class="mbr-section-title mbr-fonts-style align-center pb-1 display-5">
-                    02.03.2020<br></h3>
-                <h6 class="pb-3">Социальные проекты</h6>
-                <p class="mbr-fonts-style mbr-text align-center display-7">Волонтеры фонда организовали сегодня поездку ребятишек из Центра помощи детям, оказавшимся без попечения родителей в детскую школу искусств № 4 города Бийск.
-<br><br>Педагоги школы проводили интересные мастер-классы, очень занимательное и захватывающее мероприятие!
-<br>Дети были увлечены деятельностью познали азы искусства было полезно и познавательно!
-<br><br>Директор фонда и сам приложил руку к искусству, написал две картины: «Парус надежды» и «Корабли пустыни».
-<br>Было здорово, нам всем понравилось, спасибо такой хорошей и нужной в нашем городе школе!&nbsp;</p>
+                    {{ article.date_publish|date:"d.m.Y" }}<br></h3>
+                <h6 class="pb-3">{{ article.kind.kind }}</h6>
+                <p class="mbr-fonts-style mbr-text align-center display-7">{{ article.content|linebreaksbr }}</p>
             </div>
         </div>
     </div>
 </section>
 
-<section class="mbr-wowslider-container mbr-section mbr-section__container carousel slide mbr-section-nopadding mbr-wowslider-container--absent" data-ride="carousel" data-keyboard="false" data-wrap="true" data-interval="false" id="wowslider-2p" data-rv-view="80" style="background-color: rgb(255, 255, 255);">
-    <div class="mbr-wowslider">
-        <div class="ws_images">
-            <ul>
-                <li>
-                    
-                    <img src="/assets/images/slide3-1-1024x576.jpg" alt="title 1" title="title 1"> text 1
-                </li><li>
-                    
-                    <img src="/assets/images/slide2-1-1024x576.jpg" alt="title 2" title="title 2"> text 2
-                </li><li>
-                    
-                    <img src="/assets/images/img-1321-540x720.jpg" alt="title 2" title="title 2"> text 2
-                </li><li>
-                    
-                    <img src="/assets/images/54226f88-e21e-428d-a409-a5063463653f-622x1280.jpg" alt="title 1" title="title 1"> text 1
-                </li>
-            </ul>
-        </div>
-        <div class="ws_bullets">
-            <div>
-                <a href="#" title="">
-                    <span><img alt="slide1" src="/assets/images/tooltip3.jpg"></span>
-                </a><a href="#" title="">
-                    <span><img alt="slide1" src="/assets/images/tooltip2.jpg"></span>
-                </a><a href="#" title="">
-                    <span><img alt="slide1" src="/assets/images/tooltip2.jpg"></span>
-                </a><a href="#" title="">
-                    <span><img alt="slide1" src="/assets/images/tooltip3.jpg"></span>
-                </a>
-            </div>
-        </div>
-        <div class="ws_shadow"></div>
-        <div class="mbr-wowslider-options">
-            <div class="params" data-paddingbottom="1" data-anim-type="kenburns" data-theme="absent" data-autoplay="true" data-paddingtop="1" data-fullscreen="true" data-showbullets="false" data-timeout="2" data-duration="2" data-height="576" data-width="1024" data-responsive="1" data-showcaptions="false" data-captionseffect="slide" data-hidecontrols="false"></div>
-        </div>
-</div></section>
-
-<section class="extVideo cid-rYmyiDr3uW" id="extVideo1-2w">
-
-    
-
-    
-
+    <section class="extVideo cid-rYmyiDr3uW" id="extVideo1-2w">
     <div class="back"></div>
 
     <div class="container align-center">
         <div class="col-md-12 col-lg-12 text">
-            
+
         </div>
 
         <div class="row justify-content-center">
@@ -155,21 +120,65 @@
     </div>
 </section>
 
-<section class="extTestimonials cid-rYixR6lttH" id="extTestimonials2-2v">
-    
-    
-
-    
-    <div class="container">
-        
-        
-        <div class="row justify-content-center">
-            <div class="card col-12 col-md-6"><a href="#">
-                <div class="card-box">
-                    <div class="card-header">
-                        <div class="card-img" hidden="">
-                            <img src="/assets/images/face7.jpg" alt="">
+<section class="mbr-gallery mbr-slider-carousel cid-s0a4vEb1X8" id="gallery3-7m" style="background-color: #efefef;!important;">
+    <div>
+        <div>
+            <!-- Filter --><!-- Gallery -->
+            <div class="mbr-gallery-row">
+                <div class="mbr-gallery-layout-default">
+                    <div>
+                        <div>
+                            {% for p in photos %}
+                            <div class="mbr-gallery-item mbr-gallery-item--p0" data-video-url="false" data-tags="">
+                                <div href="#lb-gallery3-7m" data-slide-to="{{ forloop.counter0 }}" data-toggle="modal">
+                                    {% thumbnail p.photo "500x300" crop="center" as im %}
+                                        <img src="{{ im.url }}">
+                                    {% endthumbnail %}
+{#                                    <img src="{{ p.photo|thumbnail_url:'slider' }}" alt="" title=""><span class="icon-focus"></span>#}
+                                </div>
+                            </div>
+                        {% endfor %}
                         </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div><!-- Lightbox -->
+            <div data-app-prevent-settings="" class="mbr-slider modal fade carousel slide" tabindex="-1" data-keyboard="true" data-interval="false" id="lb-gallery3-7m">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="carousel-inner">
+
+                                {% for p in photos %}
+                                    <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}"><img src="{{ p.photo.url }}" alt="" title=""></div>
+                                {% endfor %}
+                            </div>
+                            <a class="carousel-control carousel-control-prev" role="button" data-slide="prev" href="#lb-gallery3-7m">
+                                <span class="mbri-left mbr-iconfont" aria-hidden="true"></span><span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control carousel-control-next" role="button" data-slide="next" href="#lb-gallery3-7m">
+                                <span class="mbri-right mbr-iconfont" aria-hidden="true"></span><span class="sr-only">Next</span></a>
+                            <a class="close" href="#" role="button" data-dismiss="modal"><span class="sr-only">Close</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<section class="extTestimonials cid-rYixR6lttH" id="extTestimonials2-2v">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="card col-12 col-md-6">
+                {% if prev_article and prev_article is not None %}
+{#                <a href="#">#}
+                <div class="card-box" onclick="location.href='/article/{{ prev_article }}'">
+                    <div class="card-header">
                         <h4 class="card-title mbr-fonts-style align-center mb-0 mbr-white display-5">Предыдущая новость</h4>
                     </div>
                     <p class="mbr-text card-text mbr-fonts-style align-left m-0 display-7">
@@ -179,7 +188,11 @@
                          <div class="line"></div>
                     </div>
                     <p class="mbr-text card-sign mbr-fonts-style align-left mb-0 display-7">07.03.2020</p>
-                </div></a>
+                </div>
+                {% else %}
+                        <br><br><h2 class="heading mbr-card-title mbr-fonts-style display-5 text-secondary">Нет более ранних статей</h2>
+                {% endif %}
+{#                </a>#}
                 </div>
 
 
@@ -209,7 +222,25 @@
 {% include 'includes/footer.html' %}
 
 
-  <script src="/assets/web/assets/jquery/jquery.min.js"></script>
+{#  <script src="/assets/web/assets/jquery/jquery.min.js"></script>#}
+{#  <script src="/assets/popper/popper.min.js"></script>#}
+{#  <script src="/assets/bootstrap/js/bootstrap.min.js"></script>#}
+{#  <script src="/assets/smoothscroll/smooth-scroll.js"></script>#}
+{#  <script src="/assets/dropdown/js/nav-dropdown.js"></script>#}
+{#  <script src="/assets/dropdown/js/navbar-dropdown.js"></script>#}
+{#  <script src="/assets/touchswipe/jquery.touch-swipe.min.js"></script>#}
+{#  <script src="/assets/viewportchecker/jquery.viewportchecker.js"></script>#}
+{#  <script src="/assets/tether/tether.min.js"></script>#}
+{#  <script src="/assets/wowslider-plugin/wowslider.js"></script>#}
+{#  <script src="/assets/mbr-popup-btns/mbr-popup-btns.js"></script>#}
+{#  <script src="/assets/playervimeo/vimeo_player.js"></script>#}
+{#  <script src="/assets/formstyler/jquery.formstyler.js"></script>#}
+{#  <script src="/assets/formstyler/jquery.formstyler.min.js"></script>#}
+{#  <script src="/assets/datepicker/jquery.datetimepicker.full.js"></script>#}
+{#  <script src="/assets/theme/js/script.js"></script>#}
+{#  <script src="/assets/wowslider-init/script.js"></script>#}
+{#  <script src="/assets/formoid.min.js"></script>#}
+    <script src="/assets/web/assets/jquery/jquery.min.js"></script>
   <script src="/assets/popper/popper.min.js"></script>
   <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
   <script src="/assets/smoothscroll/smooth-scroll.js"></script>
@@ -217,20 +248,25 @@
   <script src="/assets/dropdown/js/navbar-dropdown.js"></script>
   <script src="/assets/touchswipe/jquery.touch-swipe.min.js"></script>
   <script src="/assets/viewportchecker/jquery.viewportchecker.js"></script>
+  <script src="/assets/parallax/jarallax.min.js"></script>
   <script src="/assets/tether/tether.min.js"></script>
-  <script src="/assets/wowslider-plugin/wowslider.js"></script>
-  <script src="/assets/mbr-popup-btns/mbr-popup-btns.js"></script>
+  <script src="/assets/bootstrapcarouselswipe/bootstrap-carousel-swipe.js"></script>
+  <script src="/assets/masonry/masonry.pkgd.min.js"></script>
+  <script src="/assets/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="/assets/vimeoplayer/jquery.mb.vimeo_player.js"></script>
+  <script src="/assets/datepicker/jquery.datetimepicker.full.js"></script>
   <script src="/assets/playervimeo/vimeo_player.js"></script>
   <script src="/assets/formstyler/jquery.formstyler.js"></script>
   <script src="/assets/formstyler/jquery.formstyler.min.js"></script>
-  <script src="/assets/datepicker/jquery.datetimepicker.full.js"></script>
   <script src="/assets/theme/js/script.js"></script>
-  <script src="/assets/wowslider-init/script.js"></script>
+  <script src="/assets/slidervideo/script.js"></script>
+  <script src="/assets/gallery/player.min.js"></script>
+  <script src="/assets/gallery/script.js"></script>
   <script src="/assets/formoid.min.js"></script>
   
   
  <div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i class="mbr-arrow-up-icon mbr-arrow-up-icon-cm cm-icon cm-icon-smallarrow-up"></i></a></div>
     <input name="animation" type="hidden">
-  <script async src="/assets/wowslider-effect/kenburns/script.js"></script>
+{#  <script async src="/assets/wowslider-effect/kenburns/script.js"></script>#}
 </body>
 </html>

@@ -40,8 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'easy_thumbnails',
+    # 'easy_thumbnails',
     'django_better_admin_arrayfield',
+    'sorl.thumbnail',
     'front',
 ]
 
@@ -103,12 +104,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-THUMBNAIL_ALIASES = {
-    "": {
-        "small": {"size": (150, 150)},
-        "slider": {"size": (1024, 576)}
-    },
-}
+# THUMBNAIL_ALIASES = {
+#     "": {
+#         "small": {"size": (150, 150)},
+#         "slider": {"size": (1024, 576)}
+#     },
+# }
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -135,3 +136,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 EMAIL_CONFIG = env.email_url('EMAIL_URL', default='smtp://user@:password@localhost:25')
 vars().update(EMAIL_CONFIG)
+
+FILE_UPLOAD_PERMISSIONS = 0o644

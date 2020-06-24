@@ -1,4 +1,13 @@
 {% load thumbnail %}
+{#<a href="{{ photo.url }}">#}
+{#    <img src="{{ photo|thumbnail_url:'small' }}" />#}
+{#</a>#}
+
+{#<a href="{{ photo.url }}">#}
+{#    <img src="{{ photo|thumbnail_url:'small' }}" />#}
+{#</a>#}
 <a href="{{ photo.url }}">
-    <img src="{{ photo|thumbnail_url:'small' }}" />
+    {% thumbnail photo "150x150" crop="center" as im %}
+        <img height="150px" src="{{ im.url }}">
+    {% endthumbnail %}
 </a>

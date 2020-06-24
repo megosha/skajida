@@ -88,16 +88,17 @@ class BlagodarnostiAdmin(admin.ModelAdmin):
         form.save_photos(form.instance)
 
 class DocumentsAdmin(admin.ModelAdmin):
-    list_display = ['title', 'date_create', 'file']
+    list_display = ['title', 'file', 'date_create']
     list_display_links = ['title']
     list_filter = ['date_create']
-    save_on_top = True
+    readonly_fields = ['date_create']
 
 
 class SettingsAdmin(admin.ModelAdmin, DynamicArrayMixin):
     list_display = ['contact_email', 'mailto', 'contact_phone', 'banner_text']
     list_display_links = ['contact_email']
     list_editable = ['contact_phone', 'banner_text']
+    save_on_top = True
 
 admin.site.register(models.ArticleKind, ArticleKindAdmin)
 admin.site.register(models.Article, ArticleAdmin)

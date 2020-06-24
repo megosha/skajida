@@ -24,7 +24,7 @@ class Article(models.Model):
     title = models.CharField(max_length=250, verbose_name="Заголовок статьи")
     cover = models.FileField(upload_to='images/covers/', blank=True, verbose_name="Обложка статьи")
     content = models.TextField(blank=True, verbose_name="Содержание (текст) статьи")
-    videolink = models.TextField(null=True, blank=True, verbose_name="Ссылка на видео (одно)")
+    videolink = models.TextField(null=True, blank=True, verbose_name="Идентификатор в ссылке на видео Youtube")
 
     class Meta:
         verbose_name = "Статья"
@@ -75,9 +75,6 @@ class Blagodarnosti(models.Model):
     def __str__(self):
         return f'{self.year}'
 
-    def photos(self):
-        return BPhoto.objects.filter(year=self.year)
-
 
 class BPhoto(models.Model):
     year = models.ForeignKey('Blagodarnosti', null=True, blank=True, default=None, on_delete=models.CASCADE,
@@ -89,8 +86,8 @@ class BPhoto(models.Model):
 
 
 class Documents(models.Model):
-    title = models.CharField(max_length=100, verbose_name="Наименование файла на сайте")
-    file = models.FileField(upload_to='files/', blank=True, verbose_name="Файл")
+    title = models.TextField(verbose_name="Наименование файла на сайте")
+    file = models.FileField(upload_to='files/', verbose_name="Файл")
     date_create = models.DateTimeField(auto_now_add=True, verbose_name="Дата и время добавления файла")
 
     class Meta:

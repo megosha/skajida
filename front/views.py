@@ -1,6 +1,7 @@
 import os
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.utils import timezone
 
 # Create your views here.
 from django.views import View
@@ -27,7 +28,8 @@ class Index(View):
     def get(self, request):
         projects3 = models.Projects.objects.all()[:3]
         projects4 = models.Projects.objects.all()[3:7]
-        news = models.Article.objects.all().filter(kind__pk__in=range(1, 3)).order_by("-date_publish")[:3]
+        news = models.Article.objects.all().filter(kind__pk__in=range(1, 3), date_publish__lte=timezone.now()).order_by(
+            "-date_publish")[:3]
         context = make_context(news=news,
                                projects3=projects3,
                                projects4=projects4,
@@ -49,7 +51,7 @@ class Project(View):
         BASE_DIR = base_conf.BASE_DIR
         photos = os.listdir(os.path.join(BASE_DIR, 'static', 'images', 'projects', f'{project.pk}'))
         if photos:
-            cover =sorted(photos)[0]
+            cover = sorted(photos)[0]
             random.shuffle(photos)
             if len(photos) >= project.photo_amount:
                 photos_part = photos[:project.photo_amount]
@@ -83,23 +85,35 @@ class Article(View):
     def get(self, request, category_id, article_id):
         # todo функционал
         # todo функционал под реабилитацию
-        article = models.Article.objects.filter(kind__pk=category_id,
-                                                pk=article_id).first()
-        context = make_context(article=article)
-        if article:
-            return render(request, 'article.html', context=context)
-        else:
+        article = models.Article.objects.filter(kind__pk=category_id, pk=article_id,
+                                                date_publish__lte=timezone.now()).first()
+        photos = models.APhoto.objects.filter(article__pk=article_id)
+        next_article = models.Article.objects.filter(date_publish__gt=article.date_publish,
+                                                     date_publish__lte=timezone.now(),
+                                                     kind__pk=article.kind.pk).order_by('date_publish').first()
+        prev_article = models.Article.objects.filter(date_publish__lt=article.date_publish,
+                                                     date_publish__lte=timezone.now(),
+                                                     kind__pk=article.kind.pk).order_by('date_publish').last()
+
+        context = make_context(article=article,
+                               photos=photos,
+                               next_article=next_article,
+                               prev_article=prev_article
+                               )
+        if not article:
             HttpResponseRedirect('/')
+        return render(request, 'article.html', context=context)
 
 
 class Documents(View):
     def get(self, request):
-        # todo функционал добавления доков в базу по дате
-        return render(request, 'documents.html', context={})
+        files = models.Documents.objects.all().order_by("date_create")
+        context = make_context(files=files)
+        return render(request, 'documents.html', context=context)
 
 
 class RehabProgram(View):
-    #todo videos
+    # todo videos
     def get(self, request):
         return render(request, 'reability.html', context={})
 
