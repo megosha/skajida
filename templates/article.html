@@ -75,7 +75,7 @@
         <div class="row justify-content-center">
             <div class="col-md-10 col-sm-12 text-section">
                 
-                <p><a href="/news/1">Вернуться к списку новостей</a></p>
+                <p><a href="/news/{{ return_category }}?page={% if return_page is not None and return_page != "None" %}{{ return_page }}{% else %}1{% endif %}">Вернуться к списку новостей</a></p>
                 <h3 class="mbr-section-title mbr-fonts-style align-center pb-1 display-5">
                     {{ article.date_publish|date:"d.m.Y" }}<br></h3>
                 <h6 class="pb-3">{{ article.kind.kind }}</h6>

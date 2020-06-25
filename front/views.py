@@ -31,7 +31,7 @@ class Index(View):
     def get(self, request):
         projects3 = models.Projects.objects.all()[:3]
         projects4 = models.Projects.objects.all()[3:7]
-        news = models.Article.objects.all().filter(kind__pk__in=range(1, 3), date_publish__lte=timezone.now()).order_by(
+        news = models.Article.objects.all().filter(kind__pk__in=range(1, 4), date_publish__lte=timezone.now()).order_by(
             "-date_publish")[:3]
         context = make_context(news=news,
                                projects3=projects3,
@@ -78,18 +78,15 @@ class Blagodarnosti(View):
 
 class News(View):
     def get(self, request, category_id):
-        # todo функционал
-        # todo функционал под реабилитацию
-
         kinds = models.ArticleKind.objects.all()
         kinds_pk = list(kinds.values_list('pk', flat=True))
         if category_id in kinds_pk:
             current_category = kinds.filter(pk=category_id).first()
             news = models.Article.objects.filter(kind__pk=category_id, date_publish__lte=timezone.now()).order_by(
-                "-date_publush")
+                "-date_publish")
         else:
             current_category = None
-            news = models.Article.objects.filter(date_publish__lte=timezone.now()).order_by("-date_publush")
+            news = models.Article.objects.filter(date_publish__lte=timezone.now()).order_by("-date_publish")
         paginator = Paginator(news, 10)
         page = request.GET.get('page')
         try:
@@ -104,29 +101,41 @@ class News(View):
                                current_category=current_category,
                                news=news,
                                page=page)
+        request.session['return_page'] = f'{page}'
+        request.session['return_category'] = f'{category_id}'
         return render(request, 'news.html', context=context)
-        # todo return render(request, 'reability_news.html', context={})
 
 
 class Article(View):
     def get(self, request, category_id, article_id):
-        # todo сделать ссылку на возврат
         article = models.Article.objects.filter(kind__pk=category_id, pk=article_id,
                                                 date_publish__lte=timezone.now()).first()
         if not article:
             HttpResponseRedirect('/')
         photos = models.APhoto.objects.filter(article__pk=article_id)
-        next_article = models.Article.objects.filter(date_publish__gt=article.date_publish,
+        return_page = request.session.pop('return_page') if 'return_page' in request.session else 0
+        return_category = request.session.pop('return_category') if 'return_category' in request.session else 0
+        if category_id == 4:
+            next_article = models.Article.objects.filter(date_publish__gt=article.date_publish,
+                                                         date_publish__lte=timezone.now(),
+                                                         kind__pk=category_id).order_by('date_publish').first()
+            prev_article = models.Article.objects.filter(date_publish__lt=article.date_publish,
+                                                         date_publish__lte=timezone.now(),
+                                                         kind__pk=category_id).order_by('date_publish').last()
+        else:
+            next_article = models.Article.objects.filter(date_publish__gt=article.date_publish,
                                                      date_publish__lte=timezone.now(),
-                                                     kind__pk=article.kind.pk).order_by('date_publish').first()
-        prev_article = models.Article.objects.filter(date_publish__lt=article.date_publish,
+                                                     kind__pk__in=range(1,4)).order_by('date_publish').first()
+            prev_article = models.Article.objects.filter(date_publish__lt=article.date_publish,
                                                      date_publish__lte=timezone.now(),
-                                                     kind__pk=article.kind.pk).order_by('date_publish').last()
+                                                     kind__pk__in=range(1,4)).order_by('date_publish').last()
 
         context = make_context(article=article,
                                photos=photos,
                                next_article=next_article,
-                               prev_article=prev_article
+                               prev_article=prev_article,
+                               return_page=return_page,
+                               return_category=return_category
                                )
         return render(request, 'article.html', context=context)
 

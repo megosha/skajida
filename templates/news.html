@@ -1,3 +1,4 @@
+{% load thumbnail %}
 <!DOCTYPE html>
 <html  >
 <head>
@@ -37,22 +38,22 @@
 
 <section class="extContent cid-rYi0l6pc6J" id="extContent21-27">
 
-    {% if current_category != 4 %}
+    {% if current_category.pk != 4 %}
     <div class="container">
         <h2 class="mbr-section-title pb-3 mbr-fonts-style mbr-bold display-2">Категории</h2>
 
         <div class="row">
             <div class="col-md-4">
                 <p class="mbr-text mbr-fonts-style display-7">
-                    <span class="fa fa-star mbr-iconfont mr-2 {% if current_category is None %}active{% else %}normal{% endif %}"></span>
-                    <a href="/news/0" class="{% if current_category is None %}text-info{% else %}normal{% endif %}">Все категории</a></p>
+                    <span class="fa fa-star mbr-iconfont mr-2 {% if current_category is None %}cat-active{% else %}cat-normal{% endif %}"></span>
+                    <a href="/news/0" class="{% if current_category is None %}text-info{% else %}cat-normal{% endif %}">Все категории</a></p>
             </div>
            {% for k in kinds %}
                {% if k.pk != 4 %}
             <div class="col-md-4">
                <p class="mbr-text mbr-fonts-style display-7">
-                   <span class="fa fa-star mbr-iconfont mr-2 {% if current_category is not None and current_category.pk == k.pk %}active{% else %}normal{% endif %}"></span>
-                   <a href="/news/{{ k.pk }}" class="{% if current_category is not None and current_category.pk == k.pk %}text-info{% else %}normal{% endif %}">{{ k.kind }}</a></p>
+                   <span class="fa fa-star mbr-iconfont mr-2 {% if current_category is not None and current_category.pk == k.pk %}cat-active{% else %}cat-normal{% endif %}"></span>
+                   <a href="/news/{{ k.pk }}" class="{% if current_category is not None and current_category.pk == k.pk %}text-info{% else %}cat-normal{% endif %}">{{ k.kind }}</a></p>
 
             </div>
                {% endif %}
@@ -80,25 +81,27 @@
 </section>
 
 <section class="extFeatures cid-rYhYAEVTgi" id="extFeatures34-22">
-
-    
-
-    
     <div class="container">
         <h2 class="mbr-section-title pb-1 mbr-normal mbr-fonts-style align-left display-2">{% if current_category is None %}Все категории {% else %} {{ current_category.kind }}{% endif %}</h2>
         <div class="row row-content justify-content-center">
 
-
+            {% for n in news %}
             <div class="card p-3 col-lg-12 col-md-12">
 
                 <div class="card-wrapper">
                     <div class="card-img">
-                        <img src="/assets/images/54226f88-e21e-428d-a409-a5063463653f-1-622x1280.jpeg" title="" alt="">
+{#                        <img src="{% if n.cover %}{{ n.cover.url }}{% else %}{{ settings.default_newscover.url }}{% endif %}" title="" alt="">#}
+                        {% if n.cover %}
+                            {% thumbnail n.cover "400x200" crop="center" as im %}
+                                <img src="{{ im.url }}" alt="">
+                            {% endthumbnail %}
+                        {% else %}
+                            {% thumbnail settings.default_newscover "300x150" crop="center" as im %}
+                                <img src="{{ im.url }}" alt="">
+                            {% endthumbnail %}
+                        {% endif %}
                         <div class="card-box">
-                            <h4 class="card-title mbr-fonts-style mbr-white mbr-bold display-7"><strong>"Социальные проекты"</strong>&nbsp;</h4>
-
-                            
-
+                            <h4 class="card-title mbr-fonts-style mbr-white mbr-bold display-7"><strong>{% if n.kind.kind != 4 %}{{ n.kind.kind }}{% endif %}</strong>&nbsp;</h4>
                         </div>
                     </div>
 
@@ -106,88 +109,129 @@
 
                         <div class="text-box">
                             <div>
-                                <h4 class="card-title2 mbr-fonts-style mbr-normal align-left display-5"><a href="/article/1-1"><strong>«Творческая кузница»</strong></a>&nbsp;</h4>
+                                <h4 class="card-title2 mbr-fonts-style mbr-normal align-left display-5"><a href="/article/{{ n.kind.pk }}-{{ n.pk }}"><strong>{{ n.title }}</strong></a>&nbsp;</h4>
                                 <div class="ico-box">
                                     <span class="pr-2 mbr-iconfont mbr-iconfont-social ico2 mbri-calendar"></span>
-                                    <p class="mbr-text mbr-fonts-style phone mbr-normal display-4">02.03.2020</p>
+                                    <p class="mbr-text mbr-fonts-style phone mbr-normal display-4">{{ n.date_publish|date:"d.m.Y" }}</p>
                                 </div>
                             </div>
-
-                            
-
 
                         </div>
                         <div class="p-box">
                             <p class="mbr-text mbr-fonts-style mbr-normal card-text display-7">
-                                Волонтеры фонда организовали сегодня поездку ребятишек из Центра помощи детям, оказавшимся без попечения родителей в детскую школу искусств № 4 города Бийск.
-Педагоги школы проводили интересные мастер-классы, очень занимательное и захватывающее мероприятие!<br>
+                                {{ n.content|truncatewords:"25" }}<br>
                             </p>
-                            
-                        </div>
-                        <div class="mbr-section-btn"><a href="/article/1-1" class="btn btn-info-outline display-4">
-                                    Читать</a></div>
 
-                        
+                        </div>
+                        <div class="mbr-section-btn"><a href="/article/{{ n.kind.pk }}-{{ n.pk }}" class="btn btn-info-outline btn-sm display-4">
+                                    Читать</a></div>
                     </div>
 
                 </div>
             </div>
+                {% empty %}
+                    Новости появятся в ближайшее время, а пока здесь ненадолго пусто
+            {% endfor %}
+{#            <div class="card p-3 col-lg-12 col-md-12">#}
+{##}
+{#                <div class="card-wrapper">#}
+{#                    <div class="card-img">#}
+{#                        <img src="/assets/images/54226f88-e21e-428d-a409-a5063463653f-1-622x1280.jpeg" title="" alt="">#}
+{#                        <div class="card-box">#}
+{#                            <h4 class="card-title mbr-fonts-style mbr-white mbr-bold display-7"><strong>"Социальные проекты"</strong>&nbsp;</h4>#}
+{##}
+{#                            #}
+{##}
+{#                        </div>#}
+{#                    </div>#}
+{##}
+{#                    <div class="content-wrapper">#}
+{##}
+{#                        <div class="text-box">#}
+{#                            <div>#}
+{#                                <h4 class="card-title2 mbr-fonts-style mbr-normal align-left display-5"><a href="/article/1-1"><strong>«Творческая кузница»</strong></a>&nbsp;</h4>#}
+{#                                <div class="ico-box">#}
+{#                                    <span class="pr-2 mbr-iconfont mbr-iconfont-social ico2 mbri-calendar"></span>#}
+{#                                    <p class="mbr-text mbr-fonts-style phone mbr-normal display-4">02.03.2020</p>#}
+{#                                </div>#}
+{#                            </div>#}
+{##}
+{#                            #}
+{##}
+{##}
+{#                        </div>#}
+{#                        <div class="p-box">#}
+{#                            <p class="mbr-text mbr-fonts-style mbr-normal card-text display-7">#}
+{#                                Волонтеры фонда организовали сегодня поездку ребятишек из Центра помощи детям, оказавшимся без попечения родителей в детскую школу искусств № 4 города Бийск.#}
+{#Педагоги школы проводили интересные мастер-классы, очень занимательное и захватывающее мероприятие!<br>#}
+{#                            </p>#}
+{#                            #}
+{#                        </div>#}
+{#                        <div class="mbr-section-btn"><a href="/article/1-1" class="btn btn-info-outline display-4">#}
+{#                                    Читать</a></div>#}
+{##}
+{#                        #}
+{#                    </div>#}
+{##}
+{#                </div>#}
+{#            </div>#}
 
 
-            <div class="card p-3 col-lg-12 col-md-12">
-
-                <div class="card-wrapper">
-                    <div class="card-img">
-                        <img src="/assets/images/07.jpg" title="" alt="">
-                        <div class="card-box">
-                            <h4 class="card-title mbr-fonts-style mbr-white mbr-bold display-7">"Новости России"</h4>
-
-                            <div class="mbr-iconfont mbr-iconfont-social icobig mbri-star" media-simple="true"></div>
-
-                        </div>
-                    </div>
-
-                    <div class="content-wrapper">
-
-                        <div class="text-box">
-                            <div>
-                                <h4 class="card-title2 mbr-fonts-style mbr-normal display-5"><a href="article.html">POLITICS</a></h4>
-                                <div class="ico-box">
-                                    <span class="pr-2 mbr-iconfont mbr-iconfont-social ico2 mbri-pin"></span>
-                                    <p class="mbr-text mbr-fonts-style phone mbr-normal display-4">London</p>
-                                </div>
-                            </div>
-
-                            
-
-
-                        </div>
-                        <div class="p-box">
-                            <p class="mbr-text mbr-fonts-style mbr-normal card-text display-7">$200                                 <br>
-                            </p>
-                            <p class="mbr-text mbr-fonts-style mbr-normal card-text display-7">3 Courses                                <br>
-                            </p>
-                            <p class="mbr-text mbr-fonts-style mbr-normal card-text display-7">50 Partaker                                <br>
-                            </p>
-                            <p class="mbr-text mbr-fonts-style mbr-normal card-text display-7">10 Companies                                <br>
-                            </p>
-                        </div>
-                        <div class="mbr-section-btn"><a href="article.html" class="btn btn-info-outline display-4">
-                                    Читать</a></div>
-
-                        
-                    </div>
-
-                </div>
-            </div>
+{#            <div class="card p-3 col-lg-12 col-md-12">#}
+{##}
+{#                <div class="card-wrapper">#}
+{#                    <div class="card-img">#}
+{#                        <img src="/assets/images/07.jpg" title="" alt="">#}
+{#                        <div class="card-box">#}
+{#                            <h4 class="card-title mbr-fonts-style mbr-white mbr-bold display-7">"Новости России"</h4>#}
+{##}
+{#                            <div class="mbr-iconfont mbr-iconfont-social icobig mbri-star" media-simple="true"></div>#}
+{##}
+{#                        </div>#}
+{#                    </div>#}
+{##}
+{#                    <div class="content-wrapper">#}
+{##}
+{#                        <div class="text-box">#}
+{#                            <div>#}
+{#                                <h4 class="card-title2 mbr-fonts-style mbr-normal display-5"><a href="article.html">POLITICS</a></h4>#}
+{#                                <div class="ico-box">#}
+{#                                    <span class="pr-2 mbr-iconfont mbr-iconfont-social ico2 mbri-pin"></span>#}
+{#                                    <p class="mbr-text mbr-fonts-style phone mbr-normal display-4">London</p>#}
+{#                                </div>#}
+{#                            </div>#}
+{##}
+{#                            #}
+{##}
+{##}
+{#                        </div>#}
+{#                        <div class="p-box">#}
+{#                            <p class="mbr-text mbr-fonts-style mbr-normal card-text display-7">$200                                 <br>#}
+{#                            </p>#}
+{#                            <p class="mbr-text mbr-fonts-style mbr-normal card-text display-7">3 Courses                                <br>#}
+{#                            </p>#}
+{#                            <p class="mbr-text mbr-fonts-style mbr-normal card-text display-7">50 Partaker                                <br>#}
+{#                            </p>#}
+{#                            <p class="mbr-text mbr-fonts-style mbr-normal card-text display-7">10 Companies                                <br>#}
+{#                            </p>#}
+{#                        </div>#}
+{#                        <div class="mbr-section-btn"><a href="article.html" class="btn btn-info-outline display-4">#}
+{#                                    Читать</a></div>#}
+{##}
+{#                        #}
+{#                    </div>#}
+{##}
+{#                </div>#}
+{#            </div>#}
 
             
 
 
         </div>
+{% include "includes/paginator.html" %}
     </div>
-</section>
 
+</section>
 {% include 'includes/footer.html' %}
 
 
