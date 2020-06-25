@@ -42,8 +42,8 @@ class Index(View):
 
 class About(View):
     def get(self, request):
-        # todo возможно подгрузка фото из базы?
-        return render(request, 'about.html', context={})
+        context = make_context()
+        return render(request, 'about.html', context=context)
 
 
 class Project(View):
@@ -148,21 +148,24 @@ class Documents(View):
 
 
 class RehabProgram(View):
-    # todo videos
     def get(self, request):
-        return render(request, 'reability.html', context={})
+        context = make_context()
+        return render(request, 'reability.html', context=context)
 
 
 class RehabVidyZavisimosti(View):
     def get(self, request):
-        return render(request, 'vidy_zavisimosti.html', context={})
+        context = make_context()
+        return render(request, 'vidy_zavisimosti.html', context=context)
 
 
 class RehabSozavisimost(View):
     def get(self, request):
-        return render(request, 'sozavisimost.html', context={})
+        context = make_context()
+        return render(request, 'sozavisimost.html', context=context)
 
 
 class RehabPamyatki(View):
     def get(self, request):
-        return render(request, 'pamyatki.html', context={})
+        context = make_context()
+        return render(request, 'pamyatki.html', context=context)

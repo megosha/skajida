@@ -1,6 +1,6 @@
 from django.urls import re_path, path, include
 
-from front import views
+from front import views, ajax
 
 urlpatterns = [
     path('', views.Index.as_view()),
@@ -14,4 +14,5 @@ urlpatterns = [
     path('rehab-zavisimosti', views.RehabVidyZavisimosti.as_view()),
     path('rehab-sozavisimost', views.RehabSozavisimost.as_view()),
     path('rehab-pamyatki', views.RehabPamyatki.as_view()),
+    path('feedback/', ajax.Feedback.as_view()),
 ]
