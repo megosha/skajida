@@ -15,4 +15,5 @@ urlpatterns = [
     path('rehab-sozavisimost', views.RehabSozavisimost.as_view()),
     path('rehab-pamyatki', views.RehabPamyatki.as_view()),
     path('feedback/', ajax.Feedback.as_view()),
+    path('login/', views.Login.as_view()),
 ]

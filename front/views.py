@@ -3,7 +3,7 @@ import os
 from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils import timezone
 
 # Create your views here.
@@ -11,7 +11,7 @@ from django.views import View
 from django.conf import settings as base_conf
 import random
 
-from front import models
+from front import models, forms
 
 
 def make_context(**kwargs):
@@ -169,3 +169,43 @@ class RehabPamyatki(View):
     def get(self, request):
         context = make_context()
         return render(request, 'pamyatki.html', context=context)
+
+class Login(View):
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.request.user.is_authenticated:
+                return HttpResponseRedirect('/admin_sjd')
+            else:
+                return super(Login, self).dispatch(request)
+        except:
+            return HttpResponseRedirect('/login')
+
+    def get(self, request):
+        form = forms.Login()
+        context = make_context(form=form)
+        return render(request, 'login.html', context)
+
+    def post(self, request):
+        form = forms.Login(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['login']
+            pwd = form.cleaned_data['pwd']
+            try:
+                user = authenticate(username=username, password=pwd)
+            except Exception as e:
+                print(e)
+                return self.get(request)
+            login(self.request, user)
+            print(user)
+            return HttpResponseRedirect('/admin_sjd')
+        return HttpResponseRedirect('/')
+
+
+class Logout(View):
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            logout(self.request)
+        return HttpResponseRedirect('/')
+
+def notfound(request, exception=None):
+    return redirect('/')

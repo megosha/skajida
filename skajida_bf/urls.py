@@ -17,9 +17,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from front.views import Logout
 
+
+handler404 = 'front.views.notfound'
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
+    path('admin_sjd/logout/', Logout.as_view()),
+    path('admin_sjd/', admin.site.urls),
     path('', include('front.urls')),
 ]
 
