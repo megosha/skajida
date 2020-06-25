@@ -23,7 +23,7 @@ class Feedback(View):
             form = dict(json.loads(request.body)["form"]['data'])
             fio = form['fio']
             email_or_tel = form.get('text')
-            message = form['message']
+            message = form['Message']
         except Exception as e:
             return  self.resp(False, f'Ошибка отправки сообщения: {e}')
         subject = 'Новое обращение через форму обратной связи "Скажи жизни ДА!"'
@@ -46,10 +46,10 @@ class Feedback(View):
             except Exception as err:
                 print(err)
             return JsonResponse({"error": "1"})
-        try:
-            with open(filename, 'a', encoding='utf-8') as inp:
-                inp.write(
-                    str(datetime.now()) + str(form) + "\n")
-        except Exception as err:
-            print(err)
+        # try:
+        #     with open(filename, 'a', encoding='utf-8') as inp:
+        #         inp.write(
+        #             str(datetime.now()) + str(form) + "\n")
+        # except Exception as err:
+        #     print(err)
         return self.resp()
