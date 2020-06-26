@@ -6,12 +6,12 @@ from django_better_admin_arrayfield.models.fields import ArrayField
 
 # Create your models here.
 class ArticleKind(models.Model):
-    kind = models.CharField(max_length=100, verbose_name="Тип статьи")
+    kind = models.CharField(max_length=100, verbose_name="Тип новости")
 
     class Meta:
         ordering = ["pk"]
-        verbose_name = "Тип статьи"
-        verbose_name_plural = "2 - Типы статей"
+        verbose_name = "Тип новости"
+        verbose_name_plural = "2 - Типы новости"
 
     def __str__(self):
         return self.kind
@@ -19,16 +19,16 @@ class ArticleKind(models.Model):
 
 class Article(models.Model):
     kind = models.ForeignKey('ArticleKind', null=True, blank=True, default=None, on_delete=models.SET_DEFAULT,
-                             verbose_name="Тип статьи")
-    date_publish = models.DateTimeField(verbose_name="Дата публикации статьи")
-    title = models.CharField(max_length=250, verbose_name="Заголовок статьи")
-    cover = models.FileField(upload_to='images/covers/', blank=True, verbose_name="Обложка статьи")
-    content = models.TextField(blank=True, verbose_name="Содержание (текст) статьи")
+                             verbose_name="Тип новости")
+    date_publish = models.DateTimeField(verbose_name="Дата публикации новости")
+    title = models.CharField(max_length=250, verbose_name="Заголовок новости")
+    cover = models.FileField(upload_to='images/covers/', blank=True, verbose_name="Обложка новости")
+    content = models.TextField(blank=True, verbose_name="Содержание (текст) новости")
     videolink = models.TextField(null=True, blank=True, verbose_name="Идентификатор в ссылке на видео Youtube")
 
     class Meta:
-        verbose_name = "Статья"
-        verbose_name_plural = "1 - Статьи"
+        verbose_name = "Новость"
+        verbose_name_plural = "1 - Новости"
 
     def __str__(self):
         return f'{self.kind} -  {self.title} - {self.date_publish}'
@@ -36,7 +36,7 @@ class Article(models.Model):
 
 class APhoto(models.Model):
     article = models.ForeignKey('Article', null=True, blank=True, default=None, on_delete=models.CASCADE,
-                                verbose_name="Статья")
+                                verbose_name="Новости")
     photo = models.ImageField(upload_to='images/articles/', verbose_name="Фотографии (одна или несколько)")
 
     def __str__(self):
@@ -114,18 +114,18 @@ class Settings(models.Model):
     metadescr = models.TextField(default='', blank=True, null=True, verbose_name="Meta Description")
     metakeywords = models.TextField(default='', blank=True, null=True, verbose_name="Meta Keyword")
     default_newscover = models.ImageField(upload_to='images/covers/', blank=True,
-                                          verbose_name="Обложка статьи по умолчанию")
+                                          verbose_name="Обложка новости по умолчанию")
     default_videocover = models.ImageField(upload_to='images/covers/', blank=True,
                                            verbose_name="Обложка видео по умолчанию")
     ig = models.CharField(max_length=100, default='', blank=True, null=True,
-                          verbose_name="User id аккаунта в Instagram")
+                          verbose_name="Ссылка на аккаунт в Instagram")
     vk = models.CharField(max_length=100, default='', blank=True, null=True,
-                          verbose_name="User id аккаунта в Вконтакте")
+                          verbose_name="Ссылка на аккаунт в Вконтакте")
     ok = models.CharField(max_length=100, default='', blank=True, null=True,
-                          verbose_name="User id аккаунта в Одноклассники")
-    yt = models.CharField(max_length=100, default='', blank=True, null=True, verbose_name="User id аккаунта в Youtube")
-    fb = models.CharField(max_length=100, default='', blank=True, null=True, verbose_name="User id аккаунта в Facebook")
-    tw = models.CharField(max_length=100, default='', blank=True, null=True, verbose_name="User id аккаунта в Twitter")
+                          verbose_name="Ссылка на аккаунт в Одноклассники")
+    yt = models.CharField(max_length=100, default='', blank=True, null=True, verbose_name="Ссылка на аккаунт в Youtube")
+    fb = models.CharField(max_length=100, default='', blank=True, null=True, verbose_name="Ссылка на аккаунт в Facebook")
+    tw = models.CharField(max_length=100, default='', blank=True, null=True, verbose_name="Ссылка на аккаунт в Twitter")
 
     class Meta:
         verbose_name = "Настройки"

@@ -111,7 +111,7 @@ class Article(View):
         article = models.Article.objects.filter(kind__pk=category_id, pk=article_id,
                                                 date_publish__lte=timezone.now()).first()
         if not article:
-            HttpResponseRedirect('/')
+            return HttpResponseRedirect('/')
         photos = models.APhoto.objects.filter(article__pk=article_id)
         return_page = request.session.pop('return_page') if 'return_page' in request.session else 0
         return_category = request.session.pop('return_category') if 'return_category' in request.session else 0
