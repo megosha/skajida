@@ -5,3 +5,4 @@ static/*
 .git
 .idea
 .env
+logs/*

@@ -191,9 +191,15 @@
                 {% for n in news %}
                 <div class="card col-12 col-md-4 col-lg-4">
                     <div class="card-img">
+                    {% if n.cover %}
                         {% thumbnail n.cover "300x150" crop="center" as im %}
                             <img src="{{ im.url }}" alt="">
                         {% endthumbnail %}
+                    {% else %}
+                        {% thumbnail settings.default_newscover "300x150" crop="center" as im %}
+                                <img src="{{ im.url }}" alt="">
+                        {% endthumbnail %}
+                    {% endif %}
 {#                        <img src="{{ n.cover.url }}" alt="">#}
                     </div>
                     <div class="card-box">
