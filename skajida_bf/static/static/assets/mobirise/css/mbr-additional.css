@@ -2883,8 +2883,9 @@ section.lazy-placeholder:after {
 }
 @media (max-width: 1000px) {
   .cid-rYnLZb6Ym5 {
-   background-color: #ffffff;
-    background-image: none;
+    background-color: #ffffff!important;
+    background-image: none!important;;
+
   }
 }
 @media (max-width: 767px) {
