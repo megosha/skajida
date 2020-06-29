@@ -2880,6 +2880,12 @@ section.lazy-placeholder:after {
     left: 5rem;
   }
 }
+@media (max-width: 1000px) {
+  .cid-rYnLZb6Ym5{
+    background-color: #ffffff;
+    background-image: none;
+  }
+  }
 @media (max-width: 767px) {
   .cid-rYnLZb6Ym5 .content-wrapper {
     padding: 4rem 0rem;
