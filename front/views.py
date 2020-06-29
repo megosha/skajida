@@ -86,7 +86,7 @@ class News(View):
                 "-date_publish")
         else:
             current_category = None
-            news = models.Article.objects.filter(date_publish__lte=timezone.now()).order_by("-date_publish")
+            news = models.Article.objects.filter(kind__pk__in=range(1, 4), date_publish__lte=timezone.now()).order_by("-date_publish")
         paginator = Paginator(news, 10)
         page = request.GET.get('page')
         try:
