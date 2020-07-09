@@ -36,7 +36,7 @@ class ArticleAdmin(admin.ModelAdmin):
     list_display = ['pk', 'title', 'kind', 'date_publish', 'cover_tag']
     search_fields = ['title']
     list_display_links = ['pk', 'title']
-    list_filter = ['kind', 'date_publish', 'date_publish']
+    list_filter = ['kind', 'date_publish']
 
     form = ShowAdminArticleForm
     inlines = [ShowAPhotoInline]
@@ -77,7 +77,6 @@ class ShowBPhotoInline(admin.TabularInline):
 class BlagodarnostiAdmin(admin.ModelAdmin):
     list_display = ['year']
     list_display_links = ['year']
-    search_fields = ['year']
     list_filter = ['year']
 
     form = ShowAdminBlagodarnostiForm
@@ -91,6 +90,7 @@ class DocumentsAdmin(admin.ModelAdmin):
     list_display = ['title', 'file', 'date_create']
     list_display_links = ['title']
     list_filter = ['date_create']
+    search_fields = ['title']
     readonly_fields = ['date_create']
 
 
