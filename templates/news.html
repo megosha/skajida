@@ -76,11 +76,11 @@
                     <div class="card-img">
 {#                        <img src="{% if n.cover %}{{ n.cover.url }}{% else %}{{ settings.default_newscover.url }}{% endif %}" title="" alt="">#}
                         {% if n.cover %}
-                            {% thumbnail n.cover "400x200" crop="center" as im %}
+                            {% thumbnail n.cover "300x300" crop="top" as im %}
                                 <img src="{{ im.url }}" alt="">
                             {% endthumbnail %}
                         {% else %}
-                            {% thumbnail settings.default_newscover "300x150" crop="center" as im %}
+                            {% thumbnail settings.default_newscover "300x300" crop="center" as im %}
                                 <img src="{{ im.url }}" alt="">
                             {% endthumbnail %}
                         {% endif %}
