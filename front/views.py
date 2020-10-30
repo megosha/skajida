@@ -209,3 +209,12 @@ class Logout(View):
 
 def notfound(request, exception=None):
     return redirect('/')
+
+class OthereRender(View):
+    def get(self, request):
+        return render(request, 'othere.html', context=make_context())
+
+
+class TaxiRender(View):
+    def get(self, request):
+        return render(request, 'taxi.html', context=make_context())

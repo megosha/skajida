@@ -1,7 +1,6 @@
 from django.urls import re_path, path, include
 
 from front import views, ajax
-
 urlpatterns = [
     path('', views.Index.as_view()),
     path('about', views.About.as_view()),
@@ -16,4 +15,7 @@ urlpatterns = [
     path('rehab-pamyatki', views.RehabPamyatki.as_view()),
     path('feedback/', ajax.Feedback.as_view()),
     path('login/', views.Login.as_view()),
+    path('othere/', views.OthereRender.as_view()),
+    path('taxi/', views.TaxiRender.as_view()),
 ]
+

@@ -8,8 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <link rel="shortcut icon" href="/assets/images/logoomin-105x105.png" type="image/x-icon">
-  <meta name="description" content="Website Creator Description">
-  
+
   
   <title>Новости</title>
   <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.css">
@@ -38,30 +37,46 @@
 
 <section class="extContent cid-rYi0l6pc6J" id="extContent21-27">
 
-    {% if current_category.pk != 4 %}
+{#    {% if current_category.pk != 4 %}#}
     <div class="container">
         <h2 class="mbr-section-title pb-3 mbr-fonts-style mbr-bold display-2">Категории</h2>
 
         <div class="row">
-            <div class="col-md-4">
-                <p class="mbr-text mbr-fonts-style display-7">
-                    <span class="fa fa-star mbr-iconfont mr-2 {% if current_category is None %}cat-active{% else %}cat-normal{% endif %}"></span>
-                    <a href="/news/0" class="{% if current_category is None %}text-info{% else %}cat-normal{% endif %}">Все категории</a></p>
-            </div>
-           {% for k in kinds %}
-               {% if k.pk != 4 %}
-            <div class="col-md-4">
-               <p class="mbr-text mbr-fonts-style display-7">
-                   <span class="fa fa-star mbr-iconfont mr-2 {% if current_category is not None and current_category.pk == k.pk %}cat-active{% else %}cat-normal{% endif %}"></span>
-                   <a href="/news/{{ k.pk }}" class="{% if current_category is not None and current_category.pk == k.pk %}text-info{% else %}cat-normal{% endif %}">{{ k.kind }}</a></p>
+            {% if current_category.pk != 4 and current_category.pk != 5 %}
+                <div class="col-md-4">
+                    <p class="mbr-text mbr-fonts-style display-7">
+                        <span class="fa fa-star mbr-iconfont mr-2 {% if current_category is None %}cat-active{% else %}cat-normal{% endif %}"></span>
+                        <a href="/news/0" class="{% if current_category is None %}text-info{% else %}cat-normal{% endif %}">Все категории</a></p>
+                </div>
 
-            </div>
-               {% endif %}
-            {% endfor %}
+                {% for k in kinds %}
+                    {% if k.pk != 4 and k.pk != 5 %}
+                        <div class="col-md-4">
+                           <p class="mbr-text mbr-fonts-style display-7">
+                               <span class="fa fa-star mbr-iconfont mr-2 {% if current_category is not None and current_category.pk == k.pk %}cat-active{% else %}cat-normal{% endif %}"></span>
+                               <a href="{% if k.pk == 6 %}/taxi{% else %}/news/{{ k.pk }}{% endif %}"
+                                  class="{% if current_category is not None and current_category.pk == k.pk %}text-info{% else %}cat-normal{% endif %}">{{ k.kind }}</a></p>
 
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                {% for k in kinds %}
+                       {% if k.pk == 4 or k.pk == 5 %}
+                    <div class="col-md-4">
+                       <p class="mbr-text mbr-fonts-style display-7">
+                           <span class="fa fa-star mbr-iconfont mr-2 {% if current_category is not None and current_category.pk == k.pk %}cat-active{% else %}cat-normal{% endif %}"></span>
+                           <a href="{% if k.pk == 5 %}/othere{% else %}/news/{{ k.pk }}{% endif %}"
+                              class="{% if current_category is not None and current_category.pk == k.pk %}text-info{% else %}cat-normal{% endif %}">{{ k.kind }}</a></p>
+
+                    </div>
+                       {% endif %}
+
+                {% endfor %}
+            {% endif %}
         </div>
     </div>
-    {% endif %}
+{#    {% endif %}#}
 </section>
 
 <section class="extFeatures cid-rYhYAEVTgi" id="extFeatures34-22">
