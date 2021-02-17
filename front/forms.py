@@ -53,10 +53,10 @@ class ShowAdminBlagodarnostiForm(forms.ModelForm):
         for upload in self.files.getlist("photos"):
             validate_image_file_extension(upload)
 
-    def save_photos(self, article):
+    def save_photos(self, year):
         """Process each uploaded image."""
         for upload in self.files.getlist("photos"):
-            photo = BPhoto(article=article, photo=upload)
+            photo = BPhoto(year=year, photo=upload)
             photo.save()
 
 class Login(forms.Form):
