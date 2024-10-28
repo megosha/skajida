@@ -5,4 +5,4 @@ sorl-thumbnail
 psycopg
 Pillow
 django-cors-headers
-
+gunicorn
