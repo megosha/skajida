@@ -174,7 +174,7 @@ class Login(View):
     def dispatch(self, request, *args, **kwargs):
         try:
             if self.request.user.is_authenticated:
-                return HttpResponseRedirect('/admin_sjd')
+                return HttpResponseRedirect('/admin_sjd/')
             else:
                 return super(Login, self).dispatch(request)
         except:
